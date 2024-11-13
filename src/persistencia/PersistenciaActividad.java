@@ -1,8 +1,6 @@
 package persistencia;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -13,13 +11,16 @@ import org.json.JSONObject;
 
 import DatosEstudiante.DatosEstudianteActividad;
 import caminosActividades.*;
+import persistencia.PersistenciaDatosEstudiante;
 
 
 public class PersistenciaActividad {
 	
 	public final static String FORMATO_DATE = "EEE MMM dd HH:mm:ss zzz yyyy";
 	
-	public void salvarActividades(List<Actividad> actividades, String archivo) throws IOException {
+	private PersistenciaDatosEstudiante persisteciaDatos = new PersistenciaDatosEstudiante();
+	
+	public JSONArray salvarActividades(List<Actividad> actividades) throws IOException {
 	    JSONArray actividadesJson = new JSONArray();
 	    
 	    for (Actividad actividad : actividades) {
@@ -56,12 +57,8 @@ public class PersistenciaActividad {
 	        
 	        actividadesJson.put(actividadObj);
 	    }
-
-	    // Guardar el archivo JSON
-	    File file = new File(archivo);
-	    try (PrintWriter writer = new PrintWriter(file)) {
-	        writer.write(actividadesJson.toString(4));
-	    }
+	    
+	    return actividadesJson;
 	}
 
     public List<Actividad> cargarActividades(String archivo) throws IOException {
@@ -147,11 +144,11 @@ public class PersistenciaActividad {
     }
 
     private HashMap<String, DatosEstudianteActividad> crearDatosEstudianteDesdeJson(JSONObject actividadObj,String tipo) {
-    	return PersisteciaDatosEstudiante.cargarDatosUsuario(actividadObj,tipo);
+    	return PersistenciaDatosEstudiante.cargarDatosUsuario(actividadObj,tipo);
     }
     
     private void salvarDatosEstudianteDesdeJson(JSONArray actividadJson, Actividad actividad) {
-    	PersisteciaDatosEstudiante.salvarDatosUsuario(actividadJson, actividad);
+    	PersistenciaDatosEstudiante.salvarDatosUsuario(actividadJson, actividad);
     }
 
     private String leerArchivo(String archivo) throws IOException {

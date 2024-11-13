@@ -1,0 +1,39 @@
+[{
+    "descripcion": "Este curso está dirigido a estudiantes que quieren empezar a programar en Python. Abarca desde variables hasta bucles.",
+    "numActividadesObligatorias": 1,
+    "fechaModificacion": "mié nov 13 16:25:41 COT 2024",
+    "rating": 0,
+    "titulo": "Introducción a Python",
+    "creadorLogin": "Alonso Botero",
+    "version": 1,
+    "objectivos": [
+        "1. Entender que es una variable.",
+        "2. Saber como hacer loops."
+    ],
+    "duracion": 30,
+    "fechaCreacion": "mié nov 13 16:25:41 COT 2024",
+    "ratingTotales": 0,
+    "Actividades": [{
+        "descripcion": "Entender los distintos tipos de variables",
+        "tipo": "Tarea",
+        "rating": 0,
+        "datosEstudiante": [{"Mariana Diaz": {}}],
+        "resenias": [],
+        "creadorLogin": "Alonso Botero",
+        "nombre": "Tarea 1",
+        "objectivos": [
+            "1. Entender que es un String.",
+            "2. Entender que es un int."
+        ],
+        "fechaLim": [
+            0,
+            0,
+            10
+        ],
+        "duracion": 30,
+        "obligatoria": true,
+        "ratingTotales": 0,
+        "dificultad": 1
+    }],
+    "dificultad": 1.5
+}]

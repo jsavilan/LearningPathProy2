@@ -13,7 +13,7 @@ import caminosActividades.Examen;
 import caminosActividades.Quiz;
 import caminosActividades.Tarea;
 
-public class PersisteciaDatosEstudiante {
+public class PersistenciaDatosEstudiante {
 
 	public static HashMap<String, DatosEstudianteActividad> cargarDatosUsuario(JSONObject actividadObj, String tipo) {
 		

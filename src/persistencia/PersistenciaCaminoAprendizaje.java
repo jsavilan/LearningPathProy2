@@ -21,6 +21,8 @@ import caminosActividades.CaminoAprendizaje;
 public class PersistenciaCaminoAprendizaje {
 	
 	public final static String FORMATO_DATE = "EEE MMM dd HH:mm:ss zzz yyyy";
+	
+	private PersistenciaActividad persitenciaActividad = new PersistenciaActividad(); 
 
 	public void salvarCaminos(HashMap<String,CaminoAprendizaje> caminos, String archivo) throws IOException {
         // Crear un JSONArray para almacenar los caminos
@@ -42,17 +44,13 @@ public class PersistenciaCaminoAprendizaje {
             caminoObj.put("duracion", camino.getDuracion());
             
             Date date = camino.getFechaCreacion();
-            
-            System.out.print(dateFormat.format(date));
-            System.out.print("\n");
-            
+        
             caminoObj.put("fechaCreacion", dateFormat.format(date));
             caminoObj.put("version", camino.getVersion());
             caminoObj.put("rating", camino.getRating());
             caminoObj.put("ratingTotales", camino.getRatingsTotales());
             
             date = camino.getFechaModificacion();
-            		
             caminoObj.put("fechaModificacion", dateFormat.format(date)); 
             caminoObj.put("numActividadesObligatorias", camino.getNumActividadesObligatorias());
 
@@ -64,7 +62,7 @@ public class PersistenciaCaminoAprendizaje {
             caminoObj.put("objectivos", objetivosArray);
             
             List<Actividad> actividades = camino.getActividades();
-            JSONArray actividadesArray = new JSONArray(actividades);
+            JSONArray actividadesArray = persitenciaActividad.salvarActividades(actividades);
             
             caminoObj.put("Actividades", actividadesArray);
 

@@ -181,6 +181,9 @@ public class CaminoAprendizaje {
 	}
 
 	public Date getFechaModificacion() {
+		if (this.fechaModificacion == null) {
+			return this.fechaCreacion;
+		}
 		return this.fechaModificacion;
 	}
 
