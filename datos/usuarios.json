@@ -1,0 +1,16 @@
+[
+    {
+        "actividadActiva": false,
+        "password": "Mariana123",
+        "login": "Mariana Diaz",
+        "type": "Estudiante",
+        "historialCaminos": ["Introducción a Python"],
+        "intereses": []
+    },
+    {
+        "password": "Alonso123",
+        "caminos": ["Introducción a Python"],
+        "login": "Alonso Botero",
+        "type": "Profesor"
+    }
+]
