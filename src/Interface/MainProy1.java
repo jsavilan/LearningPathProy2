@@ -24,6 +24,14 @@ public class MainProy1 {
 		ControladorProfesor ControllerProf = new ControladorProfesor();
 		ControladorEstudiante ControllerEstu= new ControladorEstudiante();
 		CentralPersistencia persistencia = new CentralPersistencia();
+		
+		try {
+			persistencia.cargarDatos();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.print("Informacion cargada\n");
 
 		LearningPathSystem LPS = ControllerGeneral.getLPS();
 		ControllerGeneral.crearUsuario("Alonso Botero", "Alonso123", Usuario.PROFESOR, LPS);
