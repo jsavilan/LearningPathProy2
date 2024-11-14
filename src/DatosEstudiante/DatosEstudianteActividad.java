@@ -17,6 +17,7 @@ public abstract class DatosEstudianteActividad {
 		this.loginEstudiante = loginEstudiante;
 		this.estado = PENDIENTE;
 		this.fechaFinal = null;  //Se asigna cuando se finalice la actividad
+		setFechaInicio(); //TODO: fix cuando inicia una actividad
 	} 
 	
 	

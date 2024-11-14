@@ -1,7 +1,7 @@
 [{
     "descripcion": "Este curso está dirigido a estudiantes que quieren empezar a programar en Python. Abarca desde variables hasta bucles.",
     "numActividadesObligatorias": 1,
-    "fechaModificacion": "mié nov 13 16:25:41 COT 2024",
+    "fechaModificacion": "jue nov 14 14:54:28 COT 2024",
     "rating": 0,
     "titulo": "Introducción a Python",
     "creadorLogin": "Alonso Botero",
@@ -11,13 +11,18 @@
         "2. Saber como hacer loops."
     ],
     "duracion": 30,
-    "fechaCreacion": "mié nov 13 16:25:41 COT 2024",
+    "fechaCreacion": "jue nov 14 14:54:28 COT 2024",
     "ratingTotales": 0,
     "Actividades": [{
         "descripcion": "Entender los distintos tipos de variables",
         "tipo": "Tarea",
         "rating": 0,
-        "datosEstudiante": [{"Mariana Diaz": {}}],
+        "datosEstudiante": [{
+            "estado": "Pendiente",
+            "fechaInicio": "jue nov 14 14:54:28 COT 2024",
+            "fechaFinal": "null",
+            "login": "Mariana Diaz"
+        }],
         "resenias": [],
         "creadorLogin": "Alonso Botero",
         "nombre": "Tarea 1",

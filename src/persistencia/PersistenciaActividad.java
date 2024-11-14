@@ -11,14 +11,13 @@ import org.json.JSONObject;
 
 import DatosEstudiante.DatosEstudianteActividad;
 import caminosActividades.*;
-import persistencia.PersistenciaDatosEstudiante;
 
 
 public class PersistenciaActividad {
 	
 	public final static String FORMATO_DATE = "EEE MMM dd HH:mm:ss zzz yyyy";
 	
-	private PersistenciaDatosEstudiante persisteciaDatos = new PersistenciaDatosEstudiante();
+	private PersistenciaDatosEstudiante persistenciaDatos = new PersistenciaDatosEstudiante();
 	
 	public JSONArray salvarActividades(List<Actividad> actividades) throws IOException {
 	    JSONArray actividadesJson = new JSONArray();
@@ -51,8 +50,8 @@ public class PersistenciaActividad {
 	        JSONArray reseniasArray = new JSONArray(actividad.getResenias());
 	        actividadObj.put("resenias", reseniasArray);
 	        
-	        JSONArray datosEstudianteArray = new JSONArray();
-	        salvarDatosEstudianteDesdeJson(datosEstudianteArray, actividad);
+	        JSONArray datosEstudianteArray = salvarDatosEstudianteDesdeJson(actividad); //TODO: corregir para que el for se haga en la clase datosestudiante
+	        
 	        actividadObj.put("datosEstudiante", datosEstudianteArray);
 	        
 	        actividadesJson.put(actividadObj);
@@ -147,8 +146,8 @@ public class PersistenciaActividad {
     	return PersistenciaDatosEstudiante.cargarDatosUsuario(actividadObj,tipo);
     }
     
-    private void salvarDatosEstudianteDesdeJson(JSONArray actividadJson, Actividad actividad) {
-    	PersistenciaDatosEstudiante.salvarDatosUsuario(actividadJson, actividad);
+    private JSONArray salvarDatosEstudianteDesdeJson(Actividad actividad) {
+    	return persistenciaDatos.salvarDatosUsuario(actividad);
     }
 
     private String leerArchivo(String archivo) throws IOException {
