@@ -2,7 +2,6 @@ package caminosActividades;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class CaminoAprendizaje {
@@ -24,7 +23,7 @@ public class CaminoAprendizaje {
 	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, String creadorLogin) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
-		this.objetivos = objetivos;
+		this.objetivos = new ArrayList<>(objetivos);
 		this.dificultad = dificultad;
 		this.fechaCreacion= new Date();
 		this.creadorLogin=creadorLogin;
@@ -50,47 +49,32 @@ public class CaminoAprendizaje {
 		
 		this.fechaCreacion= new Date();
 
-    	Iterator<String> it1 = caminoOG.getObjetivos().iterator(); 
-    	
-    	while (it1.hasNext())
-    	{
-    		this.objetivos.add(it1.next());
-    	}
+		//Copia de objetivos
+		this.objetivos = new ArrayList<>();
+	    if (caminoOG.getObjetivos() != null) {
+	        for (String objetivo : caminoOG.getObjetivos()) {
+	            this.objetivos.add(objetivo);
+	        }
+	    }
     	
     	
     	//Copia de actividades
-    	Iterator<Actividad> it2 = caminoOG.getActividades().iterator(); 
-    	Actividad actividad;
-    	
-    	while (it2.hasNext())
-    	{
-    		if (it2.next().getType().equals(Actividad.ENCUESTA))
-    		{
-    			actividad=new Encuesta (creadorLogin, (Encuesta) it2.next());
-    		}
-    		
-    		else if (it2.next().getType().equals(Actividad.ACTIVIDADRECURSO))
-    		{
-    			actividad=new ActividadRecurso (creadorLogin, (ActividadRecurso) it2.next());
-    		}
-    		
-    		else if (it2.next().getType().equals(Actividad.EXAMEN))
-    		{
-    			actividad=new Examen (creadorLogin, (Examen) it2.next());
-    		}
-    		
-    		else if (it2.next().getType().equals(Actividad.QUIZ))
-    		{
-    			actividad=new Quiz (creadorLogin, (Quiz) it2.next());
-    		}
-    		
-    		else
-    		{
-    			actividad= new Tarea (creadorLogin, (Tarea) it2.next());
-    		}
-    		
-    		this.actividades.add(actividad);
-    	}
+	    this.actividades = new ArrayList<>();
+	    if (caminoOG.getActividades() != null) {
+	        for (Actividad actividad : caminoOG.getActividades()) {
+	            if (actividad instanceof Encuesta) {
+	                this.actividades.add(new Encuesta(creadorLogin, (Encuesta) actividad));
+	            } else if (actividad instanceof ActividadRecurso) {
+	                this.actividades.add(new ActividadRecurso(creadorLogin, (ActividadRecurso) actividad));
+	            } else if (actividad instanceof Examen) {
+	                this.actividades.add(new Examen(creadorLogin, (Examen) actividad));
+	            } else if (actividad instanceof Quiz) {
+	                this.actividades.add(new Quiz(creadorLogin, (Quiz) actividad));
+	            } else if (actividad instanceof Tarea) {
+	                this.actividades.add(new Tarea(creadorLogin, (Tarea) actividad));
+	            }
+	        }
+	    }
 		
 		this.creadorLogin=creadorLogin;
 	}
@@ -102,7 +86,7 @@ public class CaminoAprendizaje {
 		super();
 		this.titulo = titulo;
 		this.descripcion = descripcion;
-		this.objetivos = objetivos;
+		this.objetivos = new ArrayList<>(objetivos);
 		this.dificultad = dificultad;
 		this.duracion = duracion;
 		this.fechaCreacion = fechaCreacion;

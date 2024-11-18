@@ -40,11 +40,11 @@ public class ControladorEstudiante {
 		return Inscriptor.getAvancesCaminos(LPS, estudiante);
 	}
 	
-	public void  marcarRecursoExitoso(ActividadRecurso activ, Estudiante estudiante) {
+	public void  marcarRecursoExitoso(ActividadRecurso activ, Estudiante estudiante) throws Exception {
 		ActualizadorCalificacionesExitoso.marcarRecursoExitoso(activ, estudiante);
 	}
 	
-	public void marcarEncuestaExitosa(Encuesta encuesta, Estudiante estudiante) {
+	public void marcarEncuestaExitosa(Encuesta encuesta, Estudiante estudiante) throws Exception {
 		ActualizadorCalificacionesExitoso.marcarEncuestaExitosa(encuesta, estudiante);
 	}
 	
@@ -56,7 +56,7 @@ public class ControladorEstudiante {
 		ActualizadorCalificacionesExitoso.addMetodoEntrega(tarea, loginEst, metodoEntrega);
 	}
 	
-	public void marcarExamenEviado(Examen examen, Estudiante estudiante) {
+	public void marcarExamenEviado(Examen examen, Estudiante estudiante) throws Exception {
 		ActualizadorCalificacionesExitoso.marcarExamenEnviado(examen, estudiante);
 	}
 	

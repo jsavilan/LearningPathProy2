@@ -12,15 +12,15 @@ public class ControladorFuncionesGenerales {
 	private CreadorUsuarios controlUsuarios;
 	
 	
-	public ControladorFuncionesGenerales()
+	public ControladorFuncionesGenerales(LearningPathSystem LPS)
 	{
-		this.LPS = new LearningPathSystem();
+		this.LPS = LPS;
 		controlUsuarios = new CreadorUsuarios();
 
 	}
 	
-	public void crearUsuario(String login, String password, String type, LearningPathSystem LPS) {
-		controlUsuarios.crearUsuario(login, password, type, LPS);
+	public void crearUsuario(String login, String password, String type) {
+		controlUsuarios.crearUsuario(login, password, type, this.LPS);
 	}
 	
 	public boolean autentificarUsuario(String login, String password) {
