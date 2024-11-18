@@ -98,12 +98,5 @@ class VisualizadorCaminosActividadesTest {
 		assertTrue(output.contains("Reseñas de "+ar.getNombre()+":"));
 		assertTrue(output.contains("Rating total: "));
 	}
-	
-	@Test
-    public void testVerAvances() {
-		
-	}
-	
-	
 
 }

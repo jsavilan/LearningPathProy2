@@ -2,11 +2,7 @@ package DatosEstudiante;
 
 import java.util.Date;
 
-import Envios.EnvioEncuesta;
-
 public class DatosEstudianteEncuesta extends DatosEstudianteActividad {
-	
-	private EnvioEncuesta envio;
 	
 	public DatosEstudianteEncuesta(String loginEstudiante) {
 		super(loginEstudiante);

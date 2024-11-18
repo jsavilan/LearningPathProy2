@@ -48,7 +48,7 @@ public class ControladorEstudiante {
 		ActualizadorCalificacionesExitoso.marcarEncuestaExitosa(encuesta, estudiante);
 	}
 	
-	public void marcarTareaEnviada(Tarea tarea, Estudiante estudiante) {
+	public void marcarTareaEnviada(Tarea tarea, Estudiante estudiante) throws Exception {
 		ActualizadorCalificacionesExitoso.marcarTareaEnviada(tarea, estudiante);
 	} 
 	

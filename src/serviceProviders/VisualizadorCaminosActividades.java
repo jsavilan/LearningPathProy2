@@ -3,11 +3,13 @@ package serviceProviders;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import Controllers.LearningPathSystem;
 import DatosEstudiante.DatosEstudianteActividad;
 import DatosEstudiante.DatosEstudianteExamen;
 import DatosEstudiante.DatosEstudianteQuiz;
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
+import usuarios.Estudiante;
 
 public class VisualizadorCaminosActividades {
 	
@@ -65,23 +67,29 @@ public class VisualizadorCaminosActividades {
 	public static void verAvanceCamino(CaminoAprendizaje camino, String loginEstudiante)
 	{
 		System.out.println("Avance de actividades: ");
-		Iterator<Actividad> it1= camino.getActividades().iterator();
-		int actvCompletadas =0;
+		Iterator<Actividad> it1 = camino.getActividades().iterator();
+		int actvCompletadas = 0;
+		int numObligatorias = camino.getNumActividadesObligatorias();
 		
 		while (it1.hasNext())
 		{
-			DatosEstudianteActividad datoEst = it1.next().getDatoEstudianteIndividual(loginEstudiante);
-			System.out.println(it1.next().getNombre()+": "+datoEst.getEstado());
+			Actividad actividad = it1.next();
+			DatosEstudianteActividad datoEst = actividad.getDatoEstudianteIndividual(loginEstudiante);
 			
-			if (it1.next().isObligatoria() && (datoEst.getEstado().equals(DatosEstudianteActividad.EXITOSO)))
+			System.out.println(actividad.getNombre() + ": " + datoEst.getEstado());
+			
+			if (actividad.isObligatoria() && (datoEst.getEstado().equals(DatosEstudianteActividad.EXITOSO)))
 			{
-				actvCompletadas+=1;
+				actvCompletadas++;
 			}
 			
 		}
 		
-		int porcentaje = (actvCompletadas/camino.getNumActividadesObligatorias())*100;
+		int porcentaje = (numObligatorias > 0) ? (int) (( (double) actvCompletadas/numObligatorias)*100) : (100);
 		System.out.println("Porcentaje completado: "+ String.valueOf(porcentaje) + "%");
+		
+		System.out.println("Actividades completadas: " + actvCompletadas);
+	    System.out.println("Total actividades obligatorias: " + numObligatorias);
 	}
 	
 	public static void verResenias(Actividad actividad)
@@ -106,6 +114,10 @@ public class VisualizadorCaminosActividades {
 		    String avance = avances.get(caminoTitulo);
 		    System.out.println(caminoTitulo + " " + avance);
 		}
+	}
+	
+	public static void recibirRecomendaciones(Estudiante est) {
+		
 	}
 	
 }

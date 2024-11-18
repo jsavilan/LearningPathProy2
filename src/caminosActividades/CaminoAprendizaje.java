@@ -19,6 +19,7 @@ public class CaminoAprendizaje {
 	private int numActividadesObligatorias;
 	private List<Actividad> actividades; 
 	private String creadorLogin;
+	private List<String> etiquetas;
 	
 	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, String creadorLogin) {
 		this.titulo = titulo;
@@ -32,6 +33,7 @@ public class CaminoAprendizaje {
 		this.ratingsTotales=0;
 		this.version=1;
 		this.numActividadesObligatorias=0;
+		this.etiquetas = new ArrayList<String>();
 	}
 	
 	public CaminoAprendizaje(CaminoAprendizaje caminoOG, String creadorLogin, String titulo)
@@ -48,6 +50,7 @@ public class CaminoAprendizaje {
 		this.version=1;
 		
 		this.fechaCreacion= new Date();
+		this.etiquetas = new ArrayList<String>();
 
 		//Copia de objetivos
 		this.objetivos = new ArrayList<>();
@@ -56,7 +59,6 @@ public class CaminoAprendizaje {
 	            this.objetivos.add(objetivo);
 	        }
 	    }
-    	
     	
     	//Copia de actividades
 	    this.actividades = new ArrayList<>();
@@ -97,6 +99,7 @@ public class CaminoAprendizaje {
 		this.numActividadesObligatorias = numActividadesObligatorias;
 		this.actividades = actividades;
 		this.creadorLogin = creadorLogin;
+		this.etiquetas = new ArrayList<String>();
 	}
 
 	public void setFechaModificacion(Date fechaModificacion) {
@@ -191,8 +194,7 @@ public class CaminoAprendizaje {
 		this.rating=(sumatoriaPrev+ratingNuevo)/this.ratingsTotales;
 	}
 	
-	public void addObjetivo(String objetivo)
-	{
+	public void addObjetivo(String objetivo) {
 		this.objetivos.add(objetivo);
 	}
 	
@@ -202,8 +204,7 @@ public class CaminoAprendizaje {
 	 * Actualiza la duracion del camino en total
 	 * añade al contador de obligatorias si es obligatoria
 	 */
-	public void addActividad(Actividad actividad, int pos)
-	{
+	public void addActividad(Actividad actividad, int pos) {
 		this.actividades.add(pos, actividad);
 		this.duracion+=actividad.getDuracion();
 		
@@ -219,8 +220,7 @@ public class CaminoAprendizaje {
 	 * Actualiza la duracion del camino en total
 	 * 	 * añade al contador de obligatorias si es obligatoria
 	 */
-	public void addActividad(Actividad actividad)
-	{
+	public void addActividad(Actividad actividad) {
 		this.actividades.add(actividad);
 		this.duracion+=actividad.getDuracion();
 		
@@ -230,13 +230,19 @@ public class CaminoAprendizaje {
 		}
 	}
 	
-	public void delActividad(int pos)
-	{
+	public void delActividad(int pos) {
 		this.actividades.remove(pos);
 	}
 	
-	public void delObjetivo(int pos)
-	{
+	public void delObjetivo(int pos) {
 		this.objetivos.remove(pos);
+	}
+	
+	public void addEtiqueta(String etiqueta) {
+		this.etiquetas.add(etiqueta);
+	}
+	
+	public void delEtiqueta(String etiqueta) {
+		this.etiquetas.remove(etiqueta);
 	}
 }
