@@ -16,8 +16,6 @@ import Controllers.LearningPathSystem;
 import caminosActividades.ActividadRecurso;
 import caminosActividades.CaminoAprendizaje;
 import serviceProviders.VisualizadorCaminosActividades;
-import usuarios.Estudiante;
-import usuarios.Usuario;
 
 class VisualizadorCaminosActividadesTest {
 
@@ -42,9 +40,6 @@ class VisualizadorCaminosActividadesTest {
 
         // Añadir el camino al sistema
         LPS.addCamino(camino);
-
-        // Crear un estudiante
-        Estudiante estudiante = new Estudiante("Maria", "maria123", Usuario.ESTUDIANTE);
 	}
 	
 	@Test

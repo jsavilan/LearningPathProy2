@@ -245,4 +245,8 @@ public class CaminoAprendizaje {
 	public void delEtiqueta(String etiqueta) {
 		this.etiquetas.remove(etiqueta);
 	}
+	
+	public List<String> getEtiquetas() {
+		return this.etiquetas;
+	}
 }

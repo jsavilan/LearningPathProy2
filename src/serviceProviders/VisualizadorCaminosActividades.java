@@ -1,12 +1,12 @@
 package serviceProviders;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import Controllers.LearningPathSystem;
 import DatosEstudiante.DatosEstudianteActividad;
-import DatosEstudiante.DatosEstudianteExamen;
-import DatosEstudiante.DatosEstudianteQuiz;
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import usuarios.Estudiante;
@@ -116,8 +116,23 @@ public class VisualizadorCaminosActividades {
 		}
 	}
 	
-	public static void recibirRecomendaciones(Estudiante est) {
+	public static List<String> getRecomendaciones(Estudiante est, LearningPathSystem lps) {
+		List<String> recomendaciones = new ArrayList<>();
 		
+		HashMap<String, CaminoAprendizaje> caminos = lps.getCaminos();
+		
+		for (CaminoAprendizaje camino: caminos.values()) {
+			boolean caminoContado = false;
+			if (!caminoContado) {
+				for (String etiqueta: camino.getEtiquetas()) {
+					if (est.getIntereses().contains(etiqueta)) {
+						recomendaciones.add(camino.getTitulo());
+						caminoContado = true;
+					}
+				}
+			}
+		}
+		return recomendaciones;
 	}
 	
 }

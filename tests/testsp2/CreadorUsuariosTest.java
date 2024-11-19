@@ -23,7 +23,7 @@ class CreadorUsuariosTest {
     }
 	
 	@Test
-	public void crearEstudiante() {
+	public void crearEstudianteTest() {
 		creadorUsuarios.crearUsuario("Juan", "12345", Usuario.ESTUDIANTE, learningPathSystem);
         Usuario usuario = CreadorUsuarios.getUsuario("Juan");
         
@@ -33,7 +33,7 @@ class CreadorUsuariosTest {
 	}
 	
 	@Test
-	public void crearProfesor() {
+	public void crearProfesorTest() {
 		creadorUsuarios.crearUsuario("P. Jose", "abcd", Usuario.PROFESOR, learningPathSystem);
         Usuario usuario = CreadorUsuarios.getUsuario("P. Jose");
         
@@ -43,21 +43,21 @@ class CreadorUsuariosTest {
 	}
 	
 	@Test
-    public void testAutenticarUsuarioExitoso() {
+    public void autenticarUsuarioExitosoTest() {
         creadorUsuarios.crearUsuario("Fernando", "123abc", Usuario.ESTUDIANTE, learningPathSystem);
         boolean autenticado = creadorUsuarios.autentificarUsuario("Fernando", "123abc");
         assertTrue(autenticado, "No se autentica correctamente.");
     }
 	
 	@Test
-    public void testAutenticarUsuarioIncorrecto() {
+    public void autenticarUsuarioIncorrectoTest() {
         creadorUsuarios.crearUsuario("Fernando", "123abc", Usuario.ESTUDIANTE, learningPathSystem);
         boolean autenticado = creadorUsuarios.autentificarUsuario("Fernando", "abc123");
         assertFalse(autenticado, "No se debería poder autenticar.");
     }
 	
 	@Test
-	public void testUsuarioDuplicado() {
+	public void crearUsuarioDuplicadoTest() {
 	    creadorUsuarios.crearUsuario("Juan", "clave1", Usuario.ESTUDIANTE, learningPathSystem);
 	    creadorUsuarios.crearUsuario("Juan", "clave2", Usuario.ESTUDIANTE, learningPathSystem);
 	    Usuario usuario = CreadorUsuarios.getUsuario("Juan");

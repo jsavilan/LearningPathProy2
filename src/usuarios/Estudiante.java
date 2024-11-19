@@ -3,8 +3,6 @@ package usuarios;
 import java.util.ArrayList;
 import java.util.List;
 
-import caminosActividades.CaminoAprendizaje;
-
 public class Estudiante extends Usuario {
 	
 	private List<String> historialCaminos;
