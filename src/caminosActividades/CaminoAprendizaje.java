@@ -2,7 +2,6 @@ package caminosActividades;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class CaminoAprendizaje {
@@ -20,11 +19,12 @@ public class CaminoAprendizaje {
 	private int numActividadesObligatorias;
 	private List<Actividad> actividades; 
 	private String creadorLogin;
+	private List<String> etiquetas;
 	
 	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, String creadorLogin) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
-		this.objetivos = objetivos;
+		this.objetivos = new ArrayList<>(objetivos);
 		this.dificultad = dificultad;
 		this.fechaCreacion= new Date();
 		this.creadorLogin=creadorLogin;
@@ -33,6 +33,7 @@ public class CaminoAprendizaje {
 		this.ratingsTotales=0;
 		this.version=1;
 		this.numActividadesObligatorias=0;
+		this.etiquetas = new ArrayList<String>();
 	}
 	
 	public CaminoAprendizaje(CaminoAprendizaje caminoOG, String creadorLogin, String titulo)
@@ -49,48 +50,33 @@ public class CaminoAprendizaje {
 		this.version=1;
 		
 		this.fechaCreacion= new Date();
+		this.etiquetas = new ArrayList<String>();
 
-    	Iterator<String> it1 = caminoOG.getObjetivos().iterator(); 
-    	
-    	while (it1.hasNext())
-    	{
-    		this.objetivos.add(it1.next());
-    	}
-    	
+		//Copia de objetivos
+		this.objetivos = new ArrayList<>();
+	    if (caminoOG.getObjetivos() != null) {
+	        for (String objetivo : caminoOG.getObjetivos()) {
+	            this.objetivos.add(objetivo);
+	        }
+	    }
     	
     	//Copia de actividades
-    	Iterator<Actividad> it2 = caminoOG.getActividades().iterator(); 
-    	Actividad actividad;
-    	
-    	while (it2.hasNext())
-    	{
-    		if (it2.next().getType().equals(Actividad.ENCUESTA))
-    		{
-    			actividad=new Encuesta (creadorLogin, (Encuesta) it2.next());
-    		}
-    		
-    		else if (it2.next().getType().equals(Actividad.ACTIVIDADRECURSO))
-    		{
-    			actividad=new ActividadRecurso (creadorLogin, (ActividadRecurso) it2.next());
-    		}
-    		
-    		else if (it2.next().getType().equals(Actividad.EXAMEN))
-    		{
-    			actividad=new Examen (creadorLogin, (Examen) it2.next());
-    		}
-    		
-    		else if (it2.next().getType().equals(Actividad.QUIZ))
-    		{
-    			actividad=new Quiz (creadorLogin, (Quiz) it2.next());
-    		}
-    		
-    		else
-    		{
-    			actividad= new Tarea (creadorLogin, (Tarea) it2.next());
-    		}
-    		
-    		this.actividades.add(actividad);
-    	}
+	    this.actividades = new ArrayList<>();
+	    if (caminoOG.getActividades() != null) {
+	        for (Actividad actividad : caminoOG.getActividades()) {
+	            if (actividad instanceof Encuesta) {
+	                this.actividades.add(new Encuesta(creadorLogin, (Encuesta) actividad));
+	            } else if (actividad instanceof ActividadRecurso) {
+	                this.actividades.add(new ActividadRecurso(creadorLogin, (ActividadRecurso) actividad));
+	            } else if (actividad instanceof Examen) {
+	                this.actividades.add(new Examen(creadorLogin, (Examen) actividad));
+	            } else if (actividad instanceof Quiz) {
+	                this.actividades.add(new Quiz(creadorLogin, (Quiz) actividad));
+	            } else if (actividad instanceof Tarea) {
+	                this.actividades.add(new Tarea(creadorLogin, (Tarea) actividad));
+	            }
+	        }
+	    }
 		
 		this.creadorLogin=creadorLogin;
 	}
@@ -102,7 +88,7 @@ public class CaminoAprendizaje {
 		super();
 		this.titulo = titulo;
 		this.descripcion = descripcion;
-		this.objetivos = objetivos;
+		this.objetivos = new ArrayList<>(objetivos);
 		this.dificultad = dificultad;
 		this.duracion = duracion;
 		this.fechaCreacion = fechaCreacion;
@@ -113,6 +99,7 @@ public class CaminoAprendizaje {
 		this.numActividadesObligatorias = numActividadesObligatorias;
 		this.actividades = actividades;
 		this.creadorLogin = creadorLogin;
+		this.etiquetas = new ArrayList<String>();
 	}
 
 	public void setFechaModificacion(Date fechaModificacion) {
@@ -207,8 +194,7 @@ public class CaminoAprendizaje {
 		this.rating=(sumatoriaPrev+ratingNuevo)/this.ratingsTotales;
 	}
 	
-	public void addObjetivo(String objetivo)
-	{
+	public void addObjetivo(String objetivo) {
 		this.objetivos.add(objetivo);
 	}
 	
@@ -218,8 +204,7 @@ public class CaminoAprendizaje {
 	 * Actualiza la duracion del camino en total
 	 * añade al contador de obligatorias si es obligatoria
 	 */
-	public void addActividad(Actividad actividad, int pos)
-	{
+	public void addActividad(Actividad actividad, int pos) {
 		this.actividades.add(pos, actividad);
 		this.duracion+=actividad.getDuracion();
 		
@@ -235,8 +220,7 @@ public class CaminoAprendizaje {
 	 * Actualiza la duracion del camino en total
 	 * 	 * añade al contador de obligatorias si es obligatoria
 	 */
-	public void addActividad(Actividad actividad)
-	{
+	public void addActividad(Actividad actividad) {
 		this.actividades.add(actividad);
 		this.duracion+=actividad.getDuracion();
 		
@@ -246,13 +230,23 @@ public class CaminoAprendizaje {
 		}
 	}
 	
-	public void delActividad(int pos)
-	{
+	public void delActividad(int pos) {
 		this.actividades.remove(pos);
 	}
 	
-	public void delObjetivo(int pos)
-	{
+	public void delObjetivo(int pos) {
 		this.objetivos.remove(pos);
+	}
+	
+	public void addEtiqueta(String etiqueta) {
+		this.etiquetas.add(etiqueta);
+	}
+	
+	public void delEtiqueta(String etiqueta) {
+		this.etiquetas.remove(etiqueta);
+	}
+	
+	public List<String> getEtiquetas() {
+		return this.etiquetas;
 	}
 }

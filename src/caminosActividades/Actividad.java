@@ -2,7 +2,6 @@ package caminosActividades;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import DatosEstudiante.DatosEstudianteActividad;
@@ -12,7 +11,7 @@ public abstract class Actividad {
 	public static final String EXAMEN="Examen";
 	public static final String QUIZ="Quiz";
 	public static final String TAREA="Tarea";
-	public static final String ACTIVIDADRECURSO="Actividad recurso";
+	public static final String ACTIVIDADRECURSO="Actividad de Recurso";
 
 	private String nombre;
 	private String descripcion;
@@ -45,6 +44,7 @@ public abstract class Actividad {
 		this.datosEstudiantes = new HashMap<>();
 		this.actividadesPrereqs=new ArrayList<Actividad>();
 		this.actividadesSigExitoso=new ArrayList<Actividad>();
+		this.resenias = new ArrayList<>();
 	}
 	
 	/**
@@ -66,13 +66,11 @@ public abstract class Actividad {
 		this.actividadesPrereqs=new ArrayList<Actividad>();
 		this.actividadesSigExitoso=new ArrayList<Actividad>();
 		
-		Iterator<String> it1 = ActividadOG.getObjetivos().iterator(); 
-    	
-    	while (it1.hasNext())
-    	{
-    		this.objetivos.add(it1.next());
+    	if (ActividadOG.getObjetivos() != null) {
+    	    this.objetivos = new ArrayList<>(ActividadOG.getObjetivos());
+    	} else {
+    	    this.objetivos = new ArrayList<>();
     	}
-		
 	}
 	
 

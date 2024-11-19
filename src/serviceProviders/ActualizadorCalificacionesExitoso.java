@@ -48,6 +48,7 @@ public class ActualizadorCalificacionesExitoso {
 			DatosEstudianteActividad datosEst = quiz.getDatoEstudianteIndividual(loginEst);
 			if (datosEst instanceof DatosEstudianteQuiz) {
 				DatosEstudianteQuiz datosQuiz = (DatosEstudianteQuiz) datosEst;
+				datosQuiz.finalizarQuiz(quiz);
 				
 				EnvioQuiz envioQuiz = datosQuiz.getEnvioQuiz();
 				
@@ -87,36 +88,36 @@ public class ActualizadorCalificacionesExitoso {
 		}
 	}
 	
-	public static boolean marcarRecursoExitoso(ActividadRecurso actividad, Estudiante estudiante) {
+	public static boolean marcarRecursoExitoso(ActividadRecurso actividad, Estudiante estudiante) throws Exception {
 		String loginEst = estudiante.getLogin();
 		DatosEstudianteActividad datosEst = actividad.getDatoEstudianteIndividual(loginEst);
 		if (datosEst instanceof DatosEstudianteAR) {
 			DatosEstudianteAR datosAR = (DatosEstudianteAR) datosEst;
-			datosAR.finalizarActividad();
+			datosAR.finalizarAR();
 			estudiante.setActividadActiva(false);
 			return true;
 		}
 		return false;
 	}
 	
-	public static boolean marcarTareaEnviada(Tarea tarea, Estudiante estudiante) {
+	public static boolean marcarTareaEnviada(Tarea tarea, Estudiante estudiante) throws Exception {
 		String loginEst = estudiante.getLogin();
 		DatosEstudianteActividad datosEst = tarea.getDatoEstudianteIndividual(loginEst);
 		if (datosEst instanceof DatosEstudianteTarea) {
 			DatosEstudianteTarea datosTarea = (DatosEstudianteTarea) datosEst;
-			datosTarea.finalizarActividad();
+			datosTarea.finalizarTarea();
 			estudiante.setActividadActiva(false);
 			return true;
 		}
 		return false;
 	}
 	
-	public static boolean marcarEncuestaExitosa(Encuesta encuesta, Estudiante estudiante) {
+	public static boolean marcarEncuestaExitosa(Encuesta encuesta, Estudiante estudiante) throws Exception {
 		String loginEst = estudiante.getLogin();
 		DatosEstudianteActividad datosEst = encuesta.getDatoEstudianteIndividual(loginEst);
 		if (datosEst instanceof DatosEstudianteEncuesta) {
 			DatosEstudianteEncuesta datosEnc = (DatosEstudianteEncuesta) datosEst;
-			datosEnc.finalizarActividad();
+			datosEnc.finalizarEncuesta();
 			estudiante.setActividadActiva(false);
 			return true;
 		}
@@ -147,12 +148,12 @@ public class ActualizadorCalificacionesExitoso {
 		}
 	}
 	
-	public static boolean marcarExamenEnviado(Examen examen, Estudiante estudiante) {
+	public static boolean marcarExamenEnviado(Examen examen, Estudiante estudiante) throws Exception {
 		String loginEst = estudiante.getLogin();
 		DatosEstudianteActividad datosEst = examen.getDatoEstudianteIndividual(loginEst);
 		if (datosEst instanceof DatosEstudianteExamen) {
 			DatosEstudianteExamen datosEx = (DatosEstudianteExamen) datosEst;
-			datosEx.finalizarActividad();
+			datosEx.finalizarExamen();
 			estudiante.setActividadActiva(false);
 			return true;
 		}

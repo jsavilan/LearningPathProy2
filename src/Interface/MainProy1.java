@@ -20,7 +20,8 @@ public class MainProy1 {
 
 	public static void main(String[] args) 
 	{
-		ControladorFuncionesGenerales ControllerGeneral = new ControladorFuncionesGenerales();
+		LearningPathSystem LPS = new LearningPathSystem();
+		ControladorFuncionesGenerales ControllerGeneral = new ControladorFuncionesGenerales(LPS);
 		ControladorProfesor ControllerProf = new ControladorProfesor();
 		ControladorEstudiante ControllerEstu= new ControladorEstudiante();
 		CentralPersistencia persistencia = new CentralPersistencia();
@@ -32,10 +33,8 @@ public class MainProy1 {
 		}
 		
 		System.out.print("Informacion cargada\n");
-
-		LearningPathSystem LPS = ControllerGeneral.getLPS();
-		ControllerGeneral.crearUsuario("Alonso Botero", "Alonso123", Usuario.PROFESOR, LPS);
-		ControllerGeneral.crearUsuario("Alonso Botero", "Alonso1234", Usuario.PROFESOR, LPS); //Usuario Duplicado
+		ControllerGeneral.crearUsuario("Alonso Botero", "Alonso123", Usuario.PROFESOR);
+		ControllerGeneral.crearUsuario("Alonso Botero", "Alonso1234", Usuario.PROFESOR); //Usuario Duplicado
 		ControllerGeneral.autentificarUsuario("Alonso Botero", "Alonso123");
 		ControllerGeneral.autentificarUsuario("Alonso Botero", "ContraseñaIncorrecta"); //Contraseña Incorrecta
 		Profesor AlonsoProf = (Profesor) LPS.getUsuarioIndividal("Alonso Botero");
@@ -55,7 +54,7 @@ public class MainProy1 {
 
 		VisualizadorCaminosActividades.verCamino(caminoPython);
 
-		ControllerGeneral.crearUsuario("Mariana Diaz", "Mariana123", Usuario.ESTUDIANTE, ControllerGeneral.getLPS());
+		ControllerGeneral.crearUsuario("Mariana Diaz", "Mariana123", Usuario.ESTUDIANTE);
 
 		Estudiante MarianaEst= (Estudiante) LPS.getUsuarioIndividal("Mariana Diaz");
 		ControllerEstu.inscribirseCamino(MarianaEst, caminoPython);
