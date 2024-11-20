@@ -21,7 +21,6 @@ public class ConsolaEstudiante {
 	
 	public ConsolaEstudiante() {
 		this.LPS = new LearningPathSystem();
-		this.CFG= new ControladorFuncionesGenerales();
 		this.inp = new Scanner(System.in);
 	}
 	
@@ -170,7 +169,6 @@ public class ConsolaEstudiante {
 	}
 	private void inscLP() {//Falta no encuentro la forma de inscribir un LP :((((((
 		HashMap<String, CaminoAprendizaje> lps = LPS.getCaminos();
-		Set<String> stlps = lps.keySet();
 		System.out.println("\nIngrese el nombre del Learning Path:");
 		String Lp = inp.nextLine();
 		
@@ -179,6 +177,7 @@ public class ConsolaEstudiante {
 		if (lps.containsKey(Lp)) {
 
 			CaminoAprendizaje camino = lps.get(Lp);
+			logInAct.addCamino(Lp);
 			System.out.println("\n Learning Path inscrito.");
 		}
 		else {
@@ -202,6 +201,6 @@ public class ConsolaEstudiante {
 
 		HashMap<String, CaminoAprendizaje> lps = LPS.getCaminos();
 		
-		CEs.getAvancesCaminos(lps.get(lp), logInAct);
+		//CEs.getAvancesCaminos(lps.get(lp), logInAct);
 	}
 }

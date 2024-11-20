@@ -27,7 +27,6 @@ public class ConsolaProfesor {
 
 	public ConsolaProfesor() {
 		this.LPS = new LearningPathSystem();
-		this.CFG= new ControladorFuncionesGenerales();
 		this.inp = new Scanner(System.in);
 	}
 	public static void main(String[] args) throws IOException{
@@ -90,6 +89,7 @@ public class ConsolaProfesor {
 				aggRes();
 				break;
 			case 5:
+				crearLP();
 				break;
 			case 6:
 				break;
@@ -187,11 +187,134 @@ public class ConsolaProfesor {
 		String titulo = inp.nextLine();
 		System.out.println("\nIngrese una descripcion del nuevo learning path:");
 		String descripcion = inp.nextLine();
-		System.out.println("\n");
-		String titulo = inp.nextLine();
+		System.out.println("\nIngrese el nivel de dificultad, debe ser un valor de 1 a 5");
+		Double dificultad = inp.nextDouble();
+		if (dificultad < 1 || dificultad>5) {
+			System.out.println("\nEl valor que ingresó es invalido, ingrese un valor que sea mayor que 1 y menos que 5 para asignar a la dificultad:");
+			dificultad = inp.nextDouble();
+		}
 		
+		List<String>  objetivos = null;
+		
+		Boolean bandera = false;
+		
+		Integer contador = 0;
+		
+		do {
 
+			if (contador == 0) {
+				
+				System.out.println("\nIngrese un objetivo:");
+				String objetivo = inp.nextLine();
+				objetivos.add(objetivo);
+			}
+			else {
+				
+				System.out.println("\nSi desea seguir agregando objetivos ingrese la palabra 'si', si desea parar ingrese la palabra 'no':");
+				String continuar = inp.nextLine();
+				if (continuar == "si") {
+
+					System.out.println("\nIngrese un objetivo:");
+					String objetivo = inp.nextLine();
+					objetivos.add(objetivo);
+					
+				}
+				else {
+					System.out.println("\nObjetivos agregados");
+					bandera = true;
+				}
+			}
+			
+			
+		} while(bandera == false);
+		
+		CPR.crearCamino(titulo, descripcion, objetivos, dificultad, logInAct, LPS);
+	}
+	
+	private void crearAct() {
+		
+		System.out.println("\nIngrese el nombre del learning path en el que desea añadir una actividad:");
+		String caminoS = inp.nextLine();
+		if (!LPS.getCaminos().containsKey(caminoS)) {
+			System.out.println("\nNo existe el learning path");
+		}
+		else {
+		CaminoAprendizaje camino = LPS.getCaminoIndividual(caminoS);
+		System.out.println("\n1)Tarea"
+						 + "\n2)Quiz"
+						 + "\n3)Examen"
+						 + "\n4)Encuesta"
+						 + "\n5)Recurso");
+		Integer tipo = inp.nextInt();
+		
+		switch(tipo) {
+		case 1:
+			System.out.println("\nIngrese el nombre de la nueva actividad:");
+			String nombre = inp.nextLine();
+			System.out.println("\nIngrese la descripcion de la actividad:");
+			String descripcion = inp.nextLine();
+			System.out.println("\nIngrese el nivel de dificultad, debe ser un valor de 1 a 5");
+			Double dificultad = inp.nextDouble();
+			if (dificultad < 1 || dificultad>5) {
+				System.out.println("\nEl valor que ingresó es invalido, ingrese un valor que sea mayor que 1 y menos que 5 para asignar a la dificultad:");
+				dificultad = inp.nextDouble();
+			}
+			System.out.println("\nIngrese la duracion de la actividad en minutos:(debe ser un numero entero)");
+			Integer duracion = inp.nextInt();
+			int[] fechaLim = new int[3];
+			System.out.println("\nIngrese la fecha limite para la actividad:");
+			System.out.println("\nIngrese el año en el siguiente formato(20XX):");
+			fechaLim[0] = inp.nextInt();
+			System.out.println("\nIngrese el mes en el siguiente formato(XX):");
+			fechaLim[1] = inp.nextInt();
+			System.out.println("\nIngrese el dia en el siguiente formato(XX):");
+			fechaLim[3] = inp.nextInt();
+			List<String>  objetivos = null;
+			System.out.println("\nSi la actividad es obligatoria ingrese la palabra 'si', si es opcional ingrese la palabra 'no':");
+			Boolean obligatoria = false;
+			if (inp.nextLine() == "si") {
+				obligatoria = true;
+			}
+			
+			
+			Boolean bandera = false;
+			
+			Integer contador = 0;
+			
+			do {
+
+				if (contador == 0) {
+					
+					System.out.println("\nIngrese un objetivo:");
+					String objetivo = inp.nextLine();
+					objetivos.add(objetivo);
+				}
+				else {
+					
+					System.out.println("\nSi desea seguir agregando objetivos ingrese la palabra 'si', si desea parar ingrese la palabra 'no':");
+					String continuar = inp.nextLine();
+					if (continuar == "si") {
+
+						System.out.println("\nIngrese un objetivo:");
+						String objetivo = inp.nextLine();
+						objetivos.add(objetivo);
+						
+					}
+					else {
+						System.out.println("\nObjetivos agregados");
+						bandera = true;
+					}
+				}
+				
+				
+			} while(bandera == false);
+			
+			CPR.crearTareaCero(camino, nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rolAct, logInAct);
+			break;
+		}
+			
+		}
 		
 	}
-
+	
 }
