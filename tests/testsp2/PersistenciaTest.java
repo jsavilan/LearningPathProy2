@@ -2,12 +2,13 @@ package testsp2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +19,9 @@ import caminosActividades.Examen;
 import caminosActividades.PreguntaQuiz;
 import caminosActividades.Quiz;
 import caminosActividades.Tarea;
+import persistencia.CentralPersistencia;
+import persistencia.PersistenciaCaminoAprendizaje;
+import persistencia.PersistenciaUsuario;
 import serviceProviders.Inscriptor;
 import usuarios.Estudiante;
 import usuarios.Profesor;
@@ -43,8 +47,8 @@ class PersistenciaTest {
     private static Estudiante estudiante2;
     private static CaminoAprendizaje camino2;
     
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	@BeforeEach
+	void setUp() throws Exception {
 		estudiante = new Estudiante("estudiante1", "clave1", Usuario.ESTUDIANTE);
     	profesor = new Profesor("profesor", "clave2", Usuario.PROFESOR);
 
@@ -111,7 +115,66 @@ class PersistenciaTest {
         
         Inscriptor.inscribirseCamino(camino2, estudiante2);
 	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+		
+	}
+
+	@Test
+	void testSalvarUsuarios() throws IOException {
+		
+		HashMap<String, Usuario> usuarios = new HashMap<>();
+		usuarios.put(estudiante.getLogin(), estudiante);
+		usuarios.put(estudiante2.getLogin(), estudiante2);
+		usuarios.put(profesor.getLogin(), profesor);
+
+	    PersistenciaUsuario persistenciaUsuario = new PersistenciaUsuario();
+		persistenciaUsuario.salvarUsuarios(usuarios, CentralPersistencia.direccionArchivo + "/usuariosTEST.json");
+
+	    // Validación: Leer el archivo y validar contenido
+	    HashMap<String, Usuario> usuariosCargados = null;
+		try {
+			usuariosCargados = persistenciaUsuario.cargarUsuarios(CentralPersistencia.direccionArchivo + "/usuariosTEST.json");
+		} catch (IOException e) {
+		}
+	    assertNotNull(usuariosCargados, "La lista de usuarios cargados es nula.");
+	    assertEquals(usuarios.size(), usuariosCargados.size(), "El número de usuarios no coincide.");
+
+	    // Validar contenido específico
+	    for (String usuario : usuarios.keySet()) {
+	    	
+	        assertEquals(usuarios.get(usuario).getLogin(), usuariosCargados.get(usuario).getLogin(), 
+	                     "El login del usuario no coincide.");
+	        assertEquals(usuarios.get(usuario).getType(), usuariosCargados.get(usuario).getType(), 
+	                     "El tipo de usuario no coincide.");
+	    }
+		
+	}
 	
-	
-	
+	@Test
+	void testSalvarCaminos() throws IOException {
+		HashMap<String, CaminoAprendizaje> caminos = new HashMap<>();
+		caminos.put(camino.getTitulo(), camino);
+		caminos.put(camino2.getTitulo(), camino2);
+
+	    PersistenciaCaminoAprendizaje persistenciaCaminoAprendizaje = new PersistenciaCaminoAprendizaje();
+		persistenciaCaminoAprendizaje.salvarCaminos(caminos, CentralPersistencia.direccionArchivo + "/caminosTEST.json");
+
+	    // Validación: Leer el archivo y validar contenido
+		HashMap<String, CaminoAprendizaje> caminosCargados = persistenciaCaminoAprendizaje.cargarCamino(CentralPersistencia.direccionArchivo + "/caminosTEST.json");
+	    assertNotNull(caminosCargados, "La lista de caminos cargados es nula.");
+	    assertEquals(caminos.size(), caminosCargados.size(), "El número de caminos no coincide.");
+
+	    // Validar contenido específico
+	    for (String titulo : caminos.keySet()) {
+	        assertEquals(caminos.get(titulo).getTitulo(), caminosCargados.get(titulo).getTitulo(), 
+	                     "El nombre del camino no coincide.");
+	        assertEquals(caminos.get(titulo).getDescripcion(), caminosCargados.get(titulo).getDescripcion(), 
+	                     "La descripción del camino no coincide.");
+	        assertEquals(caminos.get(titulo).getObjetivos(), caminosCargados.get(titulo).getObjetivos(), 
+	                     "Los objetivos del camino no coinciden.");
+	    }
+	}
 }
+	

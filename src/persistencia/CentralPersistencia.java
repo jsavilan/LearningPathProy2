@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import Controllers.LearningPathSystem;
 import caminosActividades.CaminoAprendizaje;
 import usuarios.Usuario;
 
@@ -39,11 +40,13 @@ public class CentralPersistencia {
     }
 
     // Método para cargar los datos de los usuarios, actividades y caminos de aprendizaje
-    public void cargarDatos() throws IOException {
+    public LearningPathSystem cargarDatos() throws IOException {
         // Cargar usuarios
-        persistenciaUsuario.cargarUsuarios(direccionArchivo + "/usuarios.json");
+        HashMap<String, Usuario> usuarios = persistenciaUsuario.cargarUsuarios(direccionArchivo + "/usuarios.json");
         	
         // Cargar caminos de aprendizaje
         HashMap<String, CaminoAprendizaje> caminos = persistenciaCaminoAprendizaje.cargarCamino(direccionArchivo + "/caminos.json");
+        
+        return new LearningPathSystem(usuarios, caminos);
     }
 }
