@@ -1,0 +1,139 @@
+[{
+    "descripcion": "Descripcion",
+    "numActividadesObligatorias": 3,
+    "fechaModificacion": "mar nov 19 22:22:48 COT 2024",
+    "rating": 0,
+    "titulo": "Camino",
+    "creadorLogin": "profesor1",
+    "version": 1,
+    "objectivos": [
+        "Obj1",
+        "Obj2"
+    ],
+    "duracion": 165,
+    "fechaCreacion": "mar nov 19 22:22:48 COT 2024",
+    "ratingTotales": 0,
+    "Actividades": [
+        {
+            "descripcion": "Descripcion",
+            "tipo": "Actividad de Recurso",
+            "rating": 0,
+            "datosEstudiante": [],
+            "resenias": [],
+            "creadorLogin": "profesor1",
+            "nombre": "AR2",
+            "objectivos": [
+                "Obj1",
+                "Obj2",
+                "Obj3",
+                "Ob4"
+            ],
+            "fechaLim": [
+                2024,
+                12,
+                31
+            ],
+            "duracion": 15,
+            "obligatoria": false,
+            "ratingTotales": 0,
+            "dificultad": 1.5
+        },
+        {
+            "descripcion": "Descripcion",
+            "tipo": "Encuesta",
+            "rating": 0,
+            "datosEstudiante": [],
+            "resenias": [],
+            "creadorLogin": "profesor1",
+            "nombre": "Encuesta2",
+            "objectivos": [
+                "Obj1",
+                "Obj2",
+                "Obj3",
+                "Ob4"
+            ],
+            "fechaLim": [
+                2024,
+                12,
+                31
+            ],
+            "duracion": 15,
+            "obligatoria": false,
+            "ratingTotales": 0,
+            "dificultad": 2
+        },
+        {
+            "descripcion": "Descripcion",
+            "tipo": "Examen",
+            "rating": 0,
+            "datosEstudiante": [],
+            "resenias": [],
+            "creadorLogin": "profesor1",
+            "nombre": "Examen2",
+            "objectivos": [
+                "Obj1",
+                "Obj2",
+                "Obj3",
+                "Ob4"
+            ],
+            "fechaLim": [
+                2024,
+                12,
+                31
+            ],
+            "duracion": 60,
+            "obligatoria": true,
+            "ratingTotales": 0,
+            "dificultad": 4
+        },
+        {
+            "descripcion": "Descripcion",
+            "tipo": "Quiz",
+            "rating": 0,
+            "datosEstudiante": [],
+            "resenias": [],
+            "creadorLogin": "profesor1",
+            "nombre": "Quiz2",
+            "objectivos": [
+                "Obj1",
+                "Obj2",
+                "Obj3",
+                "Ob4"
+            ],
+            "fechaLim": [
+                2024,
+                12,
+                31
+            ],
+            "duracion": 30,
+            "obligatoria": true,
+            "ratingTotales": 0,
+            "dificultad": 3
+        },
+        {
+            "descripcion": "Descripcion",
+            "tipo": "Tarea",
+            "rating": 0,
+            "datosEstudiante": [],
+            "resenias": [],
+            "creadorLogin": "profesor1",
+            "nombre": "Tarea2",
+            "objectivos": [
+                "Obj1",
+                "Obj2",
+                "Obj3",
+                "Ob4"
+            ],
+            "fechaLim": [
+                2024,
+                12,
+                31
+            ],
+            "duracion": 45,
+            "obligatoria": true,
+            "ratingTotales": 0,
+            "dificultad": 2.5
+        }
+    ],
+    "dificultad": 3.5
+}]

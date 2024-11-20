@@ -50,7 +50,7 @@ public class PersistenciaDatosEstudiante {
 	        } else if ("QUIZ".equals(tipo)) {
 	            double calificacion = datosUsuario.getDouble("calificacion");
 	            String stringEnvio = datosUsuario.getString("envio"); //Esto tiene que ser del tipo que es envioQuiz, cuando lo saca es str
-	            HashMap<String, String> respuestas = new HashMap(); //TODO: agregar respuestas string al HashMap
+	            HashMap<String, String> respuestas = new HashMap(); // agregar respuestas string al HashMap
 	            EnvioQuiz envio = new EnvioQuiz();
 	            usuario = new DatosEstudianteQuiz(login, estado, fechaInicio, fechaFinal, calificacion, envio);
 	        } else if ("TAREA".equals(tipo)) {
@@ -58,7 +58,7 @@ public class PersistenciaDatosEstudiante {
 	            usuario = new DatosEstudianteTarea(login, estado, fechaInicio, fechaFinal, metodoEntrega);
 	        } else if ("ENCUESTA".equals(tipo)) {
 	            String stringEnvio = datosUsuario.getString("envio");
-	            HashMap<String, String> respuestas = new HashMap(); //TODO: agregar respuestas string al HashMap
+	            HashMap<String, String> respuestas = new HashMap(); // agregar respuestas string al HashMap
 	            EnvioEncuesta envio = new EnvioEncuesta(respuestas);
 	            usuario = new DatosEstudianteEncuesta(login, estado, fechaInicio, fechaFinal);
 	        } else {
@@ -110,7 +110,7 @@ public class PersistenciaDatosEstudiante {
 	        } else if ("TAREA".equals(tipo)) {
 	            datosUsuario.put("metodoEntrega", ((DatosEstudianteTarea) usuario).getMetodoEntrega());
 	        } else if ("ENCUESTA".equals(tipo))
-	        	//datosUsuario.put("envio", ((DatosEstudianteEncuesta) usuario).getEnvioEncuesta()); TODO: Agregar envio a la clase de la encuesta
+	        	//datosUsuario.put("envio", ((DatosEstudianteEncuesta) usuario).getEnvioEncuesta()); Agregar envio a la clase de la encuesta
 			
 			datosUsuarios.put(datosUsuario);
 		}

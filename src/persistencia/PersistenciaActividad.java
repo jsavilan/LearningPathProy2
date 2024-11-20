@@ -60,29 +60,14 @@ public class PersistenciaActividad {
 	    return actividadesJson;
 	}
 
-    public List<Actividad> cargarActividades(String archivo) throws IOException {
+    public List<Actividad> cargarActividades(JSONArray actividadesJson) throws IOException {
         List<Actividad> actividades = new ArrayList<>();
-        String contenido = leerArchivo(archivo);
-        JSONArray actividadesJson = new JSONArray(contenido);
 
         for (int i = 0; i < actividadesJson.length(); i++) {
             JSONObject actividadObj = actividadesJson.getJSONObject(i);
             String tipo = actividadObj.getString("tipo");  
 
             Actividad actividad = crearActividadDesdeJson(actividadObj);
-            
-            if ("EXAMEN".equals(tipo)) {
-                
-            } else if ("QUIZ".equals(tipo)) {
-               
-            } else if ("TAREA".equals(tipo)) {
-                
-            } else if ("ENCUESTA".equals(tipo)) {
-                
-            } else if ("ACTIVIDADRECURSO".equals(tipo)) {
-            	
-            }
-
             actividades.add(actividad);
         }
 
@@ -150,7 +135,4 @@ public class PersistenciaActividad {
     	return persistenciaDatos.salvarDatosUsuario(actividad);
     }
 
-    private String leerArchivo(String archivo) throws IOException {
-        return new String(Files.readAllBytes(Paths.get(archivo)));
-    }
 }

@@ -1,0 +1,16 @@
+[
+    {
+        "actividadActiva": false,
+        "password": "password",
+        "login": "estudiante1",
+        "type": "Estudiante",
+        "historialCaminos": ["Camino"],
+        "intereses": []
+    },
+    {
+        "password": "clave2",
+        "caminos": [],
+        "login": "profesor",
+        "type": "Profesor"
+    }
+]
