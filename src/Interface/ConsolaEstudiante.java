@@ -3,7 +3,9 @@ package Interface;
 import Controllers.*;
 import caminosActividades.CaminoAprendizaje;
 import usuarios.Estudiante;
+import usuarios.Usuario;
 import caminosActividades.*;
+import persistencia.CentralPersistencia;
 
 import java.util.*;
 import java.io.*;
@@ -18,6 +20,7 @@ public class ConsolaEstudiante {
 	private Scanner inp;
 	private Estudiante logInAct;
 	private String rolAct;
+	private CentralPersistencia CPER;
 	
 	public ConsolaEstudiante() {
 		this.LPS = new LearningPathSystem();
@@ -98,16 +101,31 @@ public class ConsolaEstudiante {
 	}
 	
 	private void guardarDatos() throws IOException{
-		
+
+		HashMap<String, Usuario> usuarios = CFG.getUsuarios();
+		HashMap<String, CaminoAprendizaje> caminos = CFG.getCaminos();
+		CPER.salvarDatos(usuarios, caminos);
 	}
 	private void cargarDatos() throws IOException{
-		
+
+		CPER.cargarDatos();
 	}	
 	private void resgistrarEst() {
+
+		System.out.println("\nIngrese su nombre:");
+		String logIn = inp.nextLine();
+		System.out.println("\nIngrese su contraseña:");
+		String contra = inp.nextLine();
 		
+		CFG.crearUsuario(logIn, contra, "ESTUDIANTE" );
 	}
 	private void ingresarEst() {
-		
+
+		System.out.println("\nIngrese su nombre:");
+		String logIn = inp.nextLine();
+		System.out.println("\nIngrese su contraseña:");
+		String contra = inp.nextLine();
+		CFG.autentificarUsuario(logIn, contra);
 	}
 	private void verLPs() {
 		HashMap<String, CaminoAprendizaje> lps = LPS.getCaminos();
