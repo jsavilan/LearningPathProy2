@@ -24,13 +24,14 @@ public class PersistenciaUsuario {
         for (String login : usuarios.keySet()) { // String es el nombre del usuario, Usuario es lo asociado Objeto
             
         	Usuario usuario = usuarios.get(login);
+        	String type = usuario.getType();
         	
         	JSONObject usuarioObj = new JSONObject();
             usuarioObj.put("login", login);
             usuarioObj.put("password", usuario.getPassword());
-            usuarioObj.put("type", usuario.getType());
+            usuarioObj.put("type", type);
 
-            if (usuario instanceof Estudiante) {
+            if (type.equals(Usuario.ESTUDIANTE)) {
                 Estudiante estudiante = (Estudiante) usuario;
                 usuarioObj.put("actividadActiva", estudiante.isActividadActiva());
 
@@ -41,7 +42,7 @@ public class PersistenciaUsuario {
                 // Guardar intereses
                 JSONArray interesesArray = new JSONArray(estudiante.getIntereses());
                 usuarioObj.put("intereses", interesesArray);
-            } else if (usuario instanceof Profesor) {
+            } else if (type.equals(Usuario.PROFESOR)) {
                 Profesor profesor = (Profesor) usuario;
                 
                 // Guardar caminos del profesor

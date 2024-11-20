@@ -39,7 +39,7 @@ class CalificacionesTest {
     private Profesor profesor;
     private Estudiante estudiante;
     private CaminoAprendizaje camino;
-    List<PreguntaQuiz> listaPreg;
+    private List<PreguntaQuiz> listaPreg;
     
     @BeforeEach
     public void setUp() {
