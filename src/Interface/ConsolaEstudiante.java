@@ -6,6 +6,7 @@ import usuarios.Estudiante;
 import usuarios.Usuario;
 import caminosActividades.*;
 import persistencia.CentralPersistencia;
+import serviceProviders.*;
 
 import java.util.*;
 import java.io.*;
@@ -14,16 +15,17 @@ import java.time.*;
 public class ConsolaEstudiante {
 	private LearningPathSystem LPS;
 	private ControladorFuncionesGenerales CFG;
-	private ControladorEstudiante CEs;
+	private ControladorEstudiante CEs = new ControladorEstudiante();;
 	private CaminoAprendizaje CA;
 	private Actividad ACT;
 	private Scanner inp;
 	private Estudiante logInAct;
 	private String rolAct;
-	private CentralPersistencia CPER;
+	private CentralPersistencia CPER = new CentralPersistencia();
 	
 	public ConsolaEstudiante() {
 		this.LPS = new LearningPathSystem();
+		this.CFG = new ControladorFuncionesGenerales(LPS);
 		this.inp = new Scanner(System.in);
 	}
 	
@@ -91,6 +93,7 @@ public class ConsolaEstudiante {
 				iniciarContinuarActividad();
 				break;
 			case 7:
+				verProgresoLP();
 				break;
 			
 			
@@ -108,7 +111,7 @@ public class ConsolaEstudiante {
 	}
 	private void cargarDatos() throws IOException{
 
-		CPER.cargarDatos();
+		this.LPS = CPER.cargarDatos();
 	}	
 	private void resgistrarEst() {
 
@@ -185,7 +188,7 @@ public class ConsolaEstudiante {
 			}
 		}
 	}
-	private void inscLP() {//Falta no encuentro la forma de inscribir un LP :((((((
+	private void inscLP() {
 		HashMap<String, CaminoAprendizaje> lps = LPS.getCaminos();
 		System.out.println("\nIngrese el nombre del Learning Path:");
 		String Lp = inp.nextLine();
@@ -196,6 +199,7 @@ public class ConsolaEstudiante {
 
 			CaminoAprendizaje camino = lps.get(Lp);
 			logInAct.addCamino(Lp);
+			Inscriptor.inscribirseCamino(camino, logInAct);
 			System.out.println("\n Learning Path inscrito.");
 		}
 		else {
@@ -214,11 +218,14 @@ public class ConsolaEstudiante {
 		}
 	}
 	private void verProgresoLP() {
-		System.out.println("\nIngrese el nombre del Learning Path:");
-		String lp = inp.nextLine();
-
-		HashMap<String, CaminoAprendizaje> lps = LPS.getCaminos();
 		
-		//CEs.getAvancesCaminos(lps.get(lp), logInAct);
+		HashMap<String, CaminoAprendizaje> lps = LPS.getCaminos();
+		System.out.println("\nIngrese el nombre del Learning Path:");
+		String Lp = inp.nextLine();
+		
+		CaminoAprendizaje camino = lps.get(Lp);
+		
+		VisualizadorCaminosActividades.verAvanceCamino(camino, logInAct.getLogin());
+		
 	}
 }

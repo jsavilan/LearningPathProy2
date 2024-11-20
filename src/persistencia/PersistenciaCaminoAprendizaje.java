@@ -109,7 +109,7 @@ public class PersistenciaCaminoAprendizaje {
 				e.printStackTrace();
 			}
             
-            List<Actividad> actividades = persitenciaActividad.cargarActividades(caminoObj.getJSONArray("Actividades"));
+            List<Actividad> actividades = new ArrayList<>();
             
             JSONArray objetivosArray = caminoObj.getJSONArray("objectivos");
             List<String> objetivos = new ArrayList<String>();
