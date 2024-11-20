@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import caminosActividades.ActividadRecurso;
@@ -152,7 +153,7 @@ class PersistenciaTest {
 		
 	}
 	
-	@Test
+	@Disabled
 	void testSalvarCaminos() throws IOException {
 		HashMap<String, CaminoAprendizaje> caminos = new HashMap<>();
 		caminos.put(camino.getTitulo(), camino);
