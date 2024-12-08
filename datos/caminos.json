@@ -13,27 +13,6 @@
     "duracion": 30,
     "fechaCreacion": "jue nov 14 16:31:50 COT 2024",
     "ratingTotales": 0,
-    "Actividades": [{
-        "descripcion": "Entender los distintos tipos de variables",
-        "tipo": "Tarea",
-        "rating": 0,
-        "datosEstudiante": [],
-        "resenias": [],
-        "creadorLogin": "Alonso Botero",
-        "nombre": "Tarea 1",
-        "objectivos": [
-            "1. Entender que es un String.",
-            "2. Entender que es un int."
-        ],
-        "fechaLim": [
-            0,
-            0,
-            10
-        ],
-        "duracion": 30,
-        "obligatoria": true,
-        "ratingTotales": 0,
-        "dificultad": 1
-    }],
+    "Actividades": [],
     "dificultad": 1.5
 }]

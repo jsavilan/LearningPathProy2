@@ -8,6 +8,26 @@
         "intereses": []
     },
     {
+        "actividadActiva": false,
+        "password": "JUAN",
+        "login": "JuanA",
+        "type": "Estudiante",
+        "historialCaminos": [],
+        "intereses": []
+    },
+    {
+        "password": "JUAN",
+        "caminos": [],
+        "login": "JuanProfesor",
+        "type": "Profesor"
+    },
+    {
+        "password": "JUAN",
+        "caminos": [],
+        "login": "Juan",
+        "type": "Profesor"
+    },
+    {
         "password": "Alonso123",
         "caminos": ["Introducción a Python"],
         "login": "Alonso Botero",

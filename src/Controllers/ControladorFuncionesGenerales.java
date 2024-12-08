@@ -19,8 +19,8 @@ public class ControladorFuncionesGenerales {
 
 	}
 	
-	public void crearUsuario(String login, String password, String type) {
-		controlUsuarios.crearUsuario(login, password, type, this.LPS);
+	public boolean crearUsuario(String login, String password, String type) {
+		return controlUsuarios.crearUsuario(login, password, type, this.LPS);
 	}
 	
 	public boolean autentificarUsuario(String login, String password) {
