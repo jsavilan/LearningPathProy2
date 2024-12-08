@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import usuarios.*;
-import Interface.*;
 
 public class PanelLogin {
 	public static void main(String[] args) {
@@ -143,9 +142,11 @@ public class PanelLogin {
 				String type = user.getType();
 				frame.setVisible(false); // Ocultar ventana actual
 				if (type.equals(Usuario.PROFESOR)) {
-					//new TeacherPanel(frame,(Profesor) user);
+					new TeacherPanel(frame,(Profesor)user,LPS);
+					
 				} else {
-					//new StudentPanel(frame,(Estudiante) user);
+					new StudentPanel(frame,(Estudiante) user,LPS);
+					
 				}
 				errorLabel.setText("");
 			} else {

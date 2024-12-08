@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import Controllers.LearningPathSystem;
 import usuarios.Profesor;
 
 //Panel principal para profesores
@@ -14,7 +15,7 @@ public class TeacherPanel {
 	
 	private Profesor usuario;
 	
-	public TeacherPanel(JFrame parentFrame, Profesor usuario) {
+	public TeacherPanel(JFrame parentFrame, Profesor usuario, LearningPathSystem lPS) {
 		
 		this.usuario = usuario;
 		

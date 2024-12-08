@@ -16,6 +16,14 @@
         "intereses": []
     },
     {
+        "actividadActiva": false,
+        "password": "a",
+        "login": "a",
+        "type": "Estudiante",
+        "historialCaminos": ["Introducción a Python"],
+        "intereses": []
+    },
+    {
         "password": "JUAN",
         "caminos": [],
         "login": "JuanProfesor",
