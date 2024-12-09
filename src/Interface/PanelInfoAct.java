@@ -1,9 +1,6 @@
 package Interface;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
+import java.awt.*;
 import javax.swing.*;
 import caminosActividades.*;
 
@@ -21,7 +18,8 @@ public class PanelInfoAct extends JPanel{
 	private StringBuilder preReq_ = new StringBuilder();
 	private JTextArea rese;
 	private StringBuilder rese_ = new StringBuilder();
-	private JLabel actSig;
+	private JTextArea actSig;
+	private StringBuilder actSig_ = new StringBuilder();
 	private StringBuilder objetivos_ = new StringBuilder();
 	
 	public PanelInfoAct(Actividad act) {
@@ -40,7 +38,7 @@ public class PanelInfoAct extends JPanel{
 		for (String objetivo:act.getObjetivos()) {
 			objetivos_.append(objetivo).append("\n");
 		}
-		objetivos = new JTextArea(objetivos_.toString().trim());
+		objetivos = new JTextArea("Objetivos: "+objetivos_.toString().trim());
 		objetivos.setEditable(false);
 		contenedor.add(objetivos);
 		
@@ -70,7 +68,7 @@ public class PanelInfoAct extends JPanel{
 		for (Actividad Req:act.getActividadesPrereqs()) {
 			preReq_.append(Req.getNombre()).append("\n");
 		}
-		preReq = new JTextArea(preReq_.toString().trim());
+		preReq = new JTextArea("Pre requisitos de la actividad: "+preReq_.toString().trim());
 		preReq.setEditable(false);
 		contenedor.add(preReq);
 		
@@ -80,6 +78,13 @@ public class PanelInfoAct extends JPanel{
 		rese = new JTextArea(rese_.toString().trim());
 		rese.setEditable(false);
 		contenedor.add(rese);
+		
+		for (Actividad sig:act.getActividadesSigExitoso()) {
+			actSig_.append(sig.getNombre()).append("\n");
+		}
+		actSig = new JTextArea("Siguientes actividades:"+actSig_.toString().trim());
+		actSig.setEditable(false);
+		contenedor.add(preReq);
 		
 		
 		
