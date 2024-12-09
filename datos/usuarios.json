@@ -9,31 +9,19 @@
     },
     {
         "actividadActiva": false,
-        "password": "JUAN",
-        "login": "JuanA",
+        "password": "a",
+        "login": "a",
         "type": "Estudiante",
         "historialCaminos": [],
         "intereses": []
     },
     {
         "actividadActiva": false,
-        "password": "a",
-        "login": "a",
+        "password": "ad",
+        "login": "ad",
         "type": "Estudiante",
         "historialCaminos": ["Introducción a Python"],
         "intereses": []
-    },
-    {
-        "password": "JUAN",
-        "caminos": [],
-        "login": "JuanProfesor",
-        "type": "Profesor"
-    },
-    {
-        "password": "JUAN",
-        "caminos": [],
-        "login": "Juan",
-        "type": "Profesor"
     },
     {
         "password": "Alonso123",
