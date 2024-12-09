@@ -14,7 +14,7 @@ public class CrearAct extends JFrame{
 	private JLabel labDesc;	
 	private JTextArea descAct;	
 	private JLabel labTipo;		//
-	private JComboBox comboTipo;//
+	private JComboBox<String> comboTipo;//
 	private JLabel labObjetivos;
 	private JTextField cantidadObjetivos;
 	private JTextArea objetivos;
@@ -25,17 +25,20 @@ public class CrearAct extends JFrame{
 	private JLabel labDuracion;
 	private JTextField duracion;
 	private JLabel labObligatoria;
-	private JComboBox obligatoria;
+	private JComboBox<String> obligatoria;
 	private JLabel labPreReq;
 	private JTextField cantidadPreReq;
 	private JTextArea req;
-	private JLabel labproxAct;
+	private JLabel labProxAct;
 	private JTextField cantidadProxAct;
 	private JTextArea proxAct;
 	
 	private String tipo;
+	private boolean oblig;
 	
 	private PanelObjetivos POB;
+	private PanelPreReq PPR;
+	private PanelProxAct PPA;
 	
 	public CrearAct(){
 		setLayout(new GridLayout(10,2));
@@ -54,12 +57,12 @@ public class CrearAct extends JFrame{
 		nombreAct = new JTextField();
 		add(nombreAct);
 		
-		labDesc = new JLabel("Descripcion de la actividad");
+		labDesc = new JLabel("Descripcion de la actividad:");
 		add(labDesc);
 		descAct = new JTextArea();
 		add(descAct);
 		
-		labObjetivos = new JLabel("Objetivos de la actividad");
+		labObjetivos = new JLabel("Objetivos de la actividad: ");
 		add(labObjetivos);
 		POB = new PanelObjetivos();
 		add(POB);
@@ -69,15 +72,45 @@ public class CrearAct extends JFrame{
 		dificultad = new JTextArea();
 		add(dificultad);
 		
-		labFechaLim = new JLabel("Fecha limite:");
+		labFechaLim = new JLabel("Fecha limite: ");
 		add(labFechaLim);
 		fechaLim = new JTextField();
 		add(fechaLim);
 		
-		labDuracion = new JLabel("Duracion en minutos:");
+		labDuracion = new JLabel("Duracion en minutos: ");
 		add(labDuracion);
 		duracion = new JTextField();
 		add(duracion);
+		
+		labObligatoria = new JLabel("Es obligatoria: ");
+		add(labObligatoria);
+		obligatoria = new JComboBox();
+		obligatoria.addItem("false");
+		obligatoria.addItem("true");
+		add(obligatoria);
+		
+		labPreReq = new JLabel("Pre requistos: ");
+		add(labPreReq);
+		PPR = new PanelPreReq();
+		add(PPR);
+		
+		labProxAct = new JLabel("Proximas actividades: ");
+		add(labProxAct);
+		PPA = new PanelProxAct();
+		add(PPA);		
+		
+		obligatoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tipo = obligatoria.getSelectedItem().toString();
+				
+				if(tipo == "false") {
+					oblig = false;
+				}
+				else {
+					oblig = true;
+				}
+			}
+		});
 		
 		comboTipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
