@@ -192,16 +192,35 @@ public class PanelLogin {
 		JTextField newPasswordField = new JTextField(20);
 		gbc.gridx = 1;
 		registerPanel.add(newPasswordField, gbc);
+		
+		//Botones de roles label
+		JLabel newRolLabel = new JLabel("Selecciona uno:");
+	    gbc.gridx = 0;
+	    gbc.gridy = 3;
+	    registerPanel.add(newRolLabel, gbc);
+	    
+	    //Botones de roles y panel
+	    JRadioButton botonProf = new JRadioButton("Profesor");
+	    JRadioButton botonEst = new JRadioButton("Estudiante");
+	    ButtonGroup grupoRoles = new ButtonGroup();
+	    grupoRoles.add(botonProf);
+	    grupoRoles.add(botonEst);
+	    
+	    JPanel rolPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    rolPanel.add(botonProf);
+	    rolPanel.add(botonEst);
+	    gbc.gridx = 1;
+	    registerPanel.add(rolPanel, gbc);
 
 		// Botón Guardar
 		JButton saveButton = new JButton("Guardar");
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		gbc.anchor = GridBagConstraints.CENTER;
 		registerPanel.add(saveButton, gbc);
 
 		// Botón Volver
 		JButton backButton = new JButton("Volver");
-		gbc.gridy = 4;
+		gbc.gridy = 5;
 		registerPanel.add(backButton, gbc);
 
 		// Acción del botón Guardar
@@ -210,6 +229,15 @@ public class PanelLogin {
 			String newPassword = newPasswordField.getText();
 			
 			String type;
+			
+			if (botonProf.isSelected()) {
+				type = Usuario.PROFESOR;
+			} else if (botonEst.isSelected()) {
+				type = Usuario.ESTUDIANTE;
+			} else {
+				JOptionPane.showMessageDialog(frame, "Hay que seleccionar uno máximo.", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			
 			if (newPassword.endsWith("PROFESOR")) {
 				type = Usuario.PROFESOR;
