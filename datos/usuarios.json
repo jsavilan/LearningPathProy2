@@ -8,12 +8,10 @@
         "intereses": []
     },
     {
-        "actividadActiva": false,
         "password": "a",
+        "caminos": [],
         "login": "a",
-        "type": "Estudiante",
-        "historialCaminos": [],
-        "intereses": []
+        "type": "Profesor"
     },
     {
         "actividadActiva": false,
