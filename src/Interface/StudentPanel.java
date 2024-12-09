@@ -61,11 +61,13 @@ public class StudentPanel {
 				if (confirm == JOptionPane.YES_OPTION) {
 					CentralPersistencia persistencia = new CentralPersistencia();
 					HashMap<String, CaminoAprendizaje> caminos = LPS.getCaminos();
-	                try {
-						persistencia.salvarDatos(LPS.getUsuarios(),caminos);
+					try {
+						persistencia.salvarDatos(LPS.getUsuarios(), caminos);
 					} catch (IOException e1) {
-					};
-					
+					}
+					;
+
+					frame.dispose();
 					frame.dispose();
 				}
 			}
@@ -97,6 +99,7 @@ public class StudentPanel {
 		addButton(panel, "Iniciar Actividad", "iniciarActividad");
 		addButton(panel, "Ver Progreso LP", "verProgresoLP");
 		addButton(panel, "Seleccionar LP", "seleccionarLP");
+		addButton(panel, "VisualizarActividad","verActividad");
 
 		return panel;
 	}
@@ -125,38 +128,32 @@ public class StudentPanel {
 		panel.add(new JScrollPane(textArea));
 		return panel;
 	}
-	
+
 	private JPanel seleccionarLP() {
-	    JPanel panel = new JPanel(new BorderLayout());
-	    JButton seleccionarButton = new JButton("Seleccionar Learning Path");
-	    JTextArea infoArea = new JTextArea("Seleccione un Learning Path para continuar.", 5, 30);
-	    infoArea.setFont(new Font("SansSerif", Font.BOLD, 12));
-	    infoArea.setEditable(false);
+		JPanel panel = new JPanel(new BorderLayout());
+		JButton seleccionarButton = new JButton("Seleccionar Learning Path");
+		JTextArea infoArea = new JTextArea("Seleccione un Learning Path para continuar.", 5, 30);
+		infoArea.setFont(new Font("SansSerif", Font.BOLD, 12));
+		infoArea.setEditable(false);
 
-	    seleccionarButton.addActionListener(e -> {
-	        String[] opciones = LPS.getCaminos().keySet().toArray(new String[0]);
-	        String seleccion = (String) JOptionPane.showInputDialog(
-	                frame,
-	                "Seleccione un Learning Path:",
-	                "Learning Paths",
-	                JOptionPane.QUESTION_MESSAGE,
-	                null,
-	                opciones,
-	                opciones.length > 0 ? opciones[0] : null
-	        );
+		seleccionarButton.addActionListener(e -> {
+			String[] opciones = LPS.getCaminos().keySet().toArray(new String[0]);
+			String seleccion = (String) JOptionPane.showInputDialog(frame, "Seleccione un Learning Path:",
+					"Learning Paths", JOptionPane.QUESTION_MESSAGE, null, opciones,
+					opciones.length > 0 ? opciones[0] : null);
 
-	        if (seleccion != null) {
-	            this.CA = LPS.getCaminos().get(seleccion);
-	            JOptionPane.showMessageDialog(frame, "Learning Path seleccionado: " + seleccion);
-	            infoArea.setText("Learning Path actual: " + seleccion);
-	        } else {
-	            JOptionPane.showMessageDialog(frame, "No se seleccionó ningún Learning Path.");
-	        }
-	    });
+			if (seleccion != null) {
+				this.CA = LPS.getCaminos().get(seleccion);
+				JOptionPane.showMessageDialog(frame, "Learning Path seleccionado: " + seleccion);
+				infoArea.setText("Learning Path actual: " + seleccion);
+			} else {
+				JOptionPane.showMessageDialog(frame, "No se seleccionó ningún Learning Path.");
+			}
+		});
 
-	    panel.add(infoArea, BorderLayout.CENTER);
-	    panel.add(seleccionarButton, BorderLayout.SOUTH);
-	    return panel;
+		panel.add(infoArea, BorderLayout.CENTER);
+		panel.add(seleccionarButton, BorderLayout.SOUTH);
+		return panel;
 	}
 
 	private JPanel createActivitiesPanel() {
@@ -167,10 +164,10 @@ public class StudentPanel {
 		JButton showButton = new JButton("Mostrar Actividades");
 		showButton.addActionListener(e -> {
 			if (CA == null) {
-	            JOptionPane.showMessageDialog(frame, "Debe seleccionar un Learning Path primero.", 
-	                                          "Error", JOptionPane.WARNING_MESSAGE);
-	            return;
-	        }
+				JOptionPane.showMessageDialog(frame, "Debe seleccionar un Learning Path primero.", "Error",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
 			List<Actividad> actividades = CA.getActividades();
 			textArea.setText("Actividades disponibles:\n");
 			for (Actividad act : actividades) {
@@ -183,6 +180,52 @@ public class StudentPanel {
 		return panel;
 	}
 
+	private void createActiviesInfoViewer() {
+	    if (CA == null) {
+	        JOptionPane.showMessageDialog(frame, "Debe seleccionar un Learning Path primero.", 
+	                                      "Error", JOptionPane.WARNING_MESSAGE);
+	        return;
+	    }
+
+	    // Obtener la lista de actividades del Learning Path seleccionado
+	    List<Actividad> actividades = CA.getActividades();
+	    String[] actividadesNombres = new String[actividades.size()];
+	    for (int i = 0; i < actividades.size(); i++) {
+	        actividadesNombres[i] = actividades.get(i).getNombre();
+	    }
+
+	    // Solicitar al usuario seleccionar una actividad
+	    String actividadSeleccionada = (String) JOptionPane.showInputDialog(
+	            frame,
+	            "Seleccione una actividad:",
+	            "Actividades",
+	            JOptionPane.QUESTION_MESSAGE,
+	            null,
+	            actividadesNombres,
+	            actividadesNombres.length > 0 ? actividadesNombres[0] : null
+	    );
+
+	    if (actividadSeleccionada != null) {
+	        // Buscar la actividad seleccionada en la lista
+	        Actividad actividad = null;
+	        for (Actividad act : actividades) {
+	            if (act.getNombre().equals(actividadSeleccionada)) {
+	                actividad = act;
+	                break;
+	            }
+	        }
+
+	        if (actividad != null) {
+	            // Crear el panel de información de la actividad y agregarlo al mainPanel
+	            PanelInfoAct panelInfo = new PanelInfoAct(actividad);
+	            mainPanel.add(panelInfo, "verActInfo");
+	            cardLayout.show(mainPanel, "verActInfo");
+	        } else {
+	            JOptionPane.showMessageDialog(frame, "Actividad no encontrada.", "Error", JOptionPane.ERROR_MESSAGE);}
+	    }
+	        
+	    }
+
 	private JPanel createReviewsPanel() {
 		JPanel panel = new JPanel();
 		JTextField activityField = new JTextField(20);
@@ -191,7 +234,7 @@ public class StudentPanel {
 
 		JButton searchButton = new JButton("Buscar Reseñas");
 		searchButton.addActionListener(e -> {
-			
+
 			String nombre = activityField.getText();
 			List<Actividad> actividades = CA.getActividades();
 			List<String> resenias = new ArrayList<>();
@@ -283,10 +326,10 @@ public class StudentPanel {
 		JButton startButton = new JButton("Iniciar/Continuar");
 		startButton.addActionListener(e -> {
 			if (CA == null) {
-	            JOptionPane.showMessageDialog(frame, "Debe seleccionar un Learning Path primero.", 
-	                                          "Error", JOptionPane.WARNING_MESSAGE);
-	            return;
-	        }
+				JOptionPane.showMessageDialog(frame, "Debe seleccionar un Learning Path primero.", "Error",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
 			String actividad = activityField.getText();
 			List<Actividad> actividades = CA.getActividades();
 
@@ -311,7 +354,7 @@ public class StudentPanel {
 
 		JButton progressButton = new JButton("Ver Progreso");
 		progressButton.addActionListener(e -> {
-			
+
 			String Lp = lpField.getText();
 			HashMap<String, CaminoAprendizaje> lps = LPS.getCaminos();
 

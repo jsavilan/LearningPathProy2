@@ -76,6 +76,7 @@ public class TeacherPanel {
 					};
 					
 					frame.dispose();
+					frame.dispose();
 				}
 			}
 		});
