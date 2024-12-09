@@ -1,7 +1,7 @@
 [{
     "descripcion": "Este curso está dirigido a estudiantes que quieren empezar a programar en Python. Abarca desde variables hasta bucles.",
     "numActividadesObligatorias": 1,
-    "fechaModificacion": "jue nov 14 16:31:50 COT 2024",
+    "fechaModificacion": "dom dic 08 18:14:17 COT 2024",
     "rating": 0,
     "titulo": "Introducción a Python",
     "creadorLogin": "Alonso Botero",
@@ -11,7 +11,7 @@
         "2. Saber como hacer loops."
     ],
     "duracion": 30,
-    "fechaCreacion": "jue nov 14 16:31:50 COT 2024",
+    "fechaCreacion": "dom dic 08 18:14:17 COT 2024",
     "ratingTotales": 0,
     "Actividades": [],
     "dificultad": 1.5

@@ -239,13 +239,6 @@ public class PanelLogin {
 				return;
 			}
 			
-			if (newPassword.endsWith("PROFESOR")) {
-				type = Usuario.PROFESOR;
-				newPassword = newPassword.replace("PROFESOR", "");
-			} else {
-				type = Usuario.ESTUDIANTE;
-			}
-			
 			boolean exitoso = controller_general.crearUsuario(newUser, newPassword, type);
 			
 			if (exitoso) {

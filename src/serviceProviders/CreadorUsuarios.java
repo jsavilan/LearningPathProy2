@@ -17,7 +17,6 @@ public class CreadorUsuarios {
 	
 	public boolean crearUsuario(String login, String password, String type, LearningPathSystem LPS) {
 		if (usuariosRegistrados.containsKey(login)) {
-            System.out.println("El login ya está en uso.");
             return false;
         } else {
         	
@@ -25,13 +24,11 @@ public class CreadorUsuarios {
         		Usuario nuevoUsuario = new Estudiante(login, password, type);  //Se puede poner sin type
             	usuariosRegistrados.put(login, nuevoUsuario);
 				LPS.addUsuario(nuevoUsuario);
-            	System.out.println("Usuario creado exitosamente.");
             	return true;
         	} else {
         		Usuario nuevoUsuario = new Profesor(login, password, type);  //Se puede poner sin type
             	usuariosRegistrados.put(login, nuevoUsuario);
 				LPS.addUsuario(nuevoUsuario);
-            	System.out.println("Usuario creado exitosamente.");
             	return true;
         	}	
         }

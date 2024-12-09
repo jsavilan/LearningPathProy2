@@ -104,7 +104,7 @@ public class PersistenciaActividad {
         JSONArray reseniasArray = actividadObj.getJSONArray("resenias");
         List<String> resenias = new ArrayList<String>();
         
-        for (int k = 0; k < objetivosArray.length(); k++) {
+        for (int k = 0; k < reseniasArray.length(); k++) {
             resenias.add(reseniasArray.getString(k));
         }
         
