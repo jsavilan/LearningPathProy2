@@ -1,21 +1,53 @@
 package Interface;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import Controllers.LearningPathSystem;
+import DatosEstudiante.DatosEstudianteActividad;
+import DatosEstudiante.DatosEstudianteExamen;
+import DatosEstudiante.DatosEstudianteQuiz;
+import caminosActividades.Actividad;
+import caminosActividades.CaminoAprendizaje;
+import caminosActividades.Examen;
+import caminosActividades.Tarea;
+import persistencia.CentralPersistencia;
+import serviceProviders.ActualizadorCalificacionesExitoso;
 import usuarios.Profesor;
 
 //Panel principal para profesores
 public class TeacherPanel {
+
+	private final JFrame frame = new JFrame("Panel de Estudiante");
+	private final JPanel mainPanel = new JPanel(new CardLayout());
+	private final CardLayout cardLayout = (CardLayout) mainPanel.getLayout();
 	
 	private Profesor usuario;
+	private final LearningPathSystem LPS;
+	private CaminoAprendizaje CA;
 	
-	public TeacherPanel(JFrame parentFrame, Profesor usuario, LearningPathSystem lPS) {
+	public TeacherPanel(JFrame parentFrame, Profesor usuario, LearningPathSystem LPS) {
 		
 		this.usuario = usuario;
 		this.LPS = LPS;
