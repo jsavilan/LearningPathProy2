@@ -19,7 +19,7 @@ import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import usuarios.Profesor;
 
-public class PanelEstadisticas {
+public class PanelEstadisticas extends JPanel{
 	
 	private final LearningPathSystem LPS;
     private final Profesor profesor;

@@ -99,6 +99,7 @@ public class TeacherPanel {
 
 		mainPanel.add(createViewActivitySubmissionsPanel(), "enviosActividad");
 		mainPanel.add(createViewIndividualSubmissionPanel(), "enviosInvididuales");
+		mainPanel.add(createPanelEstadisticas(), "estadisticas");
 		
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
@@ -124,7 +125,7 @@ public class TeacherPanel {
 	    addButton(panel, "Calificar Examen", "calificarExamen");
 	    addButton(panel, "Ver Envíos de Actividad", "enviosActividad");
 	    addButton(panel, "Ver Envíos Invididuales", "enviosIndividuales");
-
+	    addButton(panel, "Ver Estadísticas", "estadisticas");
 
 		return panel;
 	}
@@ -723,6 +724,10 @@ public class TeacherPanel {
 	    cloneFrame.setSize(400, 300);
 	    cloneFrame.setVisible(true);
 	    return panel;
+	}
+	
+	private JPanel createPanelEstadisticas() {
+	    return new PanelEstadisticas(LPS, usuario);
 	}
 
 }
