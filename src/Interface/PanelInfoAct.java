@@ -28,33 +28,22 @@ public class PanelInfoAct extends JPanel{
 		
 		JPanel contenedor = new JPanel();
 		JScrollPane scrollP = new JScrollPane(contenedor);
-
-		scrollP.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollP.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.Y_AXIS));
-		
 		descripcion = new JTextArea(act.getDescripcion());
 		descripcion.setEditable(false);
-		contenedor.add(descripcion);
 		
 		for (String objetivo:act.getObjetivos()) {
 			objetivos_.append(objetivo).append("\n");
 		}
 		objetivos = new JTextArea(objetivos_.toString().trim());
-		objetivos.setEditable(false);
-		contenedor.add(objetivos);
+		descripcion.setEditable(false);
 		
 		rating = new JLabel("Rating: " + act.getRating());
-		contenedor.add(rating);
 		
 		dificultad = new JLabel("Dificultad: "+ act.getDificultad());
-		contenedor.add(dificultad);
 		
 		fechaLim = new JLabel("Fecha Limite:" + act.getFechaLim()[0] + "/" + act.getFechaLim()[1] + "/" + act.getFechaLim()[2]);
-		contenedor.add(fechaLim);
 		
 		duracion = new JLabel("Duracion: " + act.getDuracion() + " minutos");
-		contenedor.add(duracion);
 		
 		if (act.isObligatoria()) {
 			obligatoria = new JLabel("La actividad es obligatoria");
@@ -62,27 +51,20 @@ public class PanelInfoAct extends JPanel{
 		else {
 			obligatoria = new JLabel("La actividad no es obligatoria");
 		}
-		contenedor.add(obligatoria);
 		
 		logInCreador = new JLabel("Autor: " + act.getCreadorLogin());
-		contenedor.add(logInCreador);
 
 		for (Actividad Req:act.getActividadesPrereqs()) {
 			preReq_.append(Req.getNombre()).append("\n");
 		}
 		preReq = new JTextArea(preReq_.toString().trim());
 		preReq.setEditable(false);
-		contenedor.add(preReq);
 		
 		for (String res:act.getResenias()) {
 			rese_.append(res).append("\n");
 		}
 		rese = new JTextArea(rese_.toString().trim());
-		rese.setEditable(false);
-		contenedor.add(rese);
-		
-		
-		
+		preReq.setEditable(false);
 		
 	}
 	
